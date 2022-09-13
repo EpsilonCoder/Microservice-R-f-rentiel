@@ -1,0 +1,95 @@
+<div>
+  <h2 id="page-heading" data-cy="TypeAutoriteContractanteHeading">
+    <span jhiTranslate="gatewayApp.referentielTypeAutoriteContractante.home.title">Types d'authorité contractantes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gatewayApp.referentielTypeAutoriteContractante.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-type-autorite-contractante"
+        [routerLink]="['/type-autorite-contractante/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.referentielTypeAutoriteContractante.home.createLabel">
+          Créer un nouveau Type Autorite Contractante
+        </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="typeAutoriteContractantes?.length === 0">
+    <span jhiTranslate="gatewayApp.referentielTypeAutoriteContractante.home.notFound">Aucun Type Autorite Contractante trouvé</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="typeAutoriteContractantes && typeAutoriteContractantes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="code">
+            <span jhiTranslate="gatewayApp.referentielTypeAutoriteContractante.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="gatewayApp.referentielTypeAutoriteContractante.description">Description</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="libelle">
+            <span jhiTranslate="gatewayApp.referentielTypeAutoriteContractante.libelle">Libelle</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="ordre">
+            <span jhiTranslate="gatewayApp.referentielTypeAutoriteContractante.ordre">Ordre</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let typeAutoriteContractante of typeAutoriteContractantes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/type-autorite-contractante', typeAutoriteContractante.id, 'view']">{{ typeAutoriteContractante.id }}</a>
+          </td>
+          <td>{{ typeAutoriteContractante.code }}</td>
+          <td>{{ typeAutoriteContractante.description }}</td>
+          <td>{{ typeAutoriteContractante.libelle }}</td>
+          <td>{{ typeAutoriteContractante.ordre }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/type-autorite-contractante', typeAutoriteContractante.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/type-autorite-contractante', typeAutoriteContractante.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(typeAutoriteContractante)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

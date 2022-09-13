@@ -1,0 +1,8 @@
+{
+  "home": {
+    "title": "Bienvenue sur la plateforme E-SIGMAP",
+    "logged": {
+      "message": "Vous êtes connecté en tant que \"{{username}}\"."
+    } 
+  }
+}

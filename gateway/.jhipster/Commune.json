@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20220912111346",
+  "clientRootFolder": "referentiel",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "commune",
+  "fields": [
+    {
+      "fieldName": "addresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "denomination",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "faxe",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "logo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sigle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "urlsiteweb",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "Type",
+      "fieldValues": "EXEMPLE"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "referentiel",
+  "name": "Commune",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "typeAutoriteContractante",
+      "otherEntityRelationshipName": "commune",
+      "relationshipName": "typeautorite",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "departement",
+      "otherEntityRelationshipName": "commune",
+      "relationshipName": "department",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

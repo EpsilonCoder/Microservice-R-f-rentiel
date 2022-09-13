@@ -1,0 +1,148 @@
+<div>
+  <h2 id="page-heading" data-cy="CommuneHeading">
+    <span jhiTranslate="gatewayApp.referentielCommune.home.title">Listes des authorités contractantes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gatewayApp.referentielCommune.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-commune"
+        [routerLink]="['/commune/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.referentielCommune.home.createLabel"> Créer un nouveau Commune </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="communes?.length === 0">
+    <span jhiTranslate="gatewayApp.referentielCommune.home.notFound">Aucun Commune trouvé</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="communes && communes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id"><span >Choisir</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="addresse">
+            <span jhiTranslate="gatewayApp.referentielCommune.addresse">Addresse</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="denomination">
+            <span jhiTranslate="gatewayApp.referentielCommune.denomination">Denomination</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="faxe">
+            <span jhiTranslate="gatewayApp.referentielCommune.faxe">Faxe</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="logo">
+            <span jhiTranslate="gatewayApp.referentielCommune.logo">Logo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sigle">
+            <span jhiTranslate="gatewayApp.referentielCommune.sigle">Sigle</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="telephone">
+            <span jhiTranslate="gatewayApp.referentielCommune.telephone">Telephone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="urlsiteweb">
+            <span jhiTranslate="gatewayApp.referentielCommune.urlsiteweb">Urlsiteweb</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="type">
+            <span jhiTranslate="gatewayApp.referentielCommune.type">Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="typeautorite.id">
+            <span jhiTranslate="gatewayApp.referentielCommune.typeautorite">Typeautorite</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="department.id">
+            <span jhiTranslate="gatewayApp.referentielCommune.department">Department</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let commune of communes; trackBy: trackId" data-cy="entityTable">
+          <td> <input type="checkbox"> </td>
+          <td>
+            <a [routerLink]="['/commune', commune.id, 'view']">{{ commune.id }}</a>
+          </td>
+          <td>{{ commune.addresse }}</td>
+          <td>{{ commune.denomination }}</td>
+          <td>{{ commune.faxe }}</td>
+          <td>{{ commune.logo }}</td>
+          <td>{{ commune.sigle }}</td>
+          <td>{{ commune.telephone }}</td>
+          <td>{{ commune.urlsiteweb }}</td>
+          <td jhiTranslate="{{ 'gatewayApp.Type.' + commune.type }}">{{ commune.type }}</td>
+          <td>
+            <div *ngIf="commune.typeautorite">
+              <a [routerLink]="['/type-autorite-contractante', commune.typeautorite.id, 'view']">{{ commune.typeautorite?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="commune.department">
+              <a [routerLink]="['/departement', commune.department.id, 'view']">{{ commune.department?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/commune', commune.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/commune', commune.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(commune)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-grid gap-2">
+    <button class="btn btn-lg btn-primary" type="button">Ajouter aux déparetements</button>
+  </div>
+
+  <div *ngIf="communes && communes.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "applications": "*",
+  "changelogDate": "20220912111348",
+  "clientRootFolder": "referentiel",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "departement",
+  "fields": [
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "referentiel",
+  "name": "Departement",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "commune",
+      "otherEntityRelationshipName": "department",
+      "relationshipName": "commune",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="commune">
+      <h2 data-cy="communeDetailsHeading"><span jhiTranslate="gatewayApp.referentielCommune.detail.title">Commune</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ commune.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.referentielCommune.addresse">Addresse</span></dt>
+        <dd>
+          <span>{{ commune.addresse }}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.referentielCommune.denomination">Denomination</span></dt>
+        <dd>
+          <span>{{ commune.denomination }}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.referentielCommune.faxe">Faxe</span></dt>
+        <dd>
+          <span>{{ commune.faxe }}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.referentielCommune.logo">Logo</span></dt>
+        <dd>
+          <span>{{ commune.logo }}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.referentielCommune.sigle">Sigle</span></dt>
+        <dd>
+          <span>{{ commune.sigle }}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.referentielCommune.telephone">Telephone</span></dt>
+        <dd>
+          <span>{{ commune.telephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.referentielCommune.urlsiteweb">Urlsiteweb</span></dt>
+        <dd>
+          <span>{{ commune.urlsiteweb }}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.referentielCommune.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'gatewayApp.Type.' + commune.type }}">{{ commune.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.referentielCommune.typeautorite">Typeautorite</span></dt>
+        <dd>
+          <div *ngIf="commune.typeautorite">
+            <a [routerLink]="['/type-autorite-contractante', commune.typeautorite.id, 'view']">{{ commune.typeautorite?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.referentielCommune.department">Department</span></dt>
+        <dd>
+          <div *ngIf="commune.department">
+            <a [routerLink]="['/departement', commune.department.id, 'view']">{{ commune.department?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/commune', commune.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

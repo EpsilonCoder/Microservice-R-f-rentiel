@@ -1,0 +1,41 @@
+
+entity Commune {
+    addresse String
+    denomination String 
+    faxe String 
+    logo String
+    sigle String
+    telephone String
+    urlsiteweb String
+    type Type
+}
+
+
+enum Type {
+    EXEMPLE, EXEMPLE, EXEMPLE, EXEMPLE, EXEMPLE
+}
+
+
+entity TypeAutoriteContractante {
+  code String
+  description String
+  libelle String
+  ordre Integer
+  
+}
+
+entity Departement {
+  libelle String
+}
+
+
+relationship OneToMany {
+	TypeAutoriteContractante to Commune{typeautorite}
+    Departement to Commune{department}
+}
+
+
+paginate Departement , Commune with pagination
+
+service all with serviceImpl
+

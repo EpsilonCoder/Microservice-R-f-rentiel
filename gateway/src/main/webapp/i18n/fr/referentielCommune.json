@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "referentielCommune": {
+      "home": {
+        "title": "Communes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Commune",
+        "createOrEditLabel": "Créer ou éditer un Commune",
+        "notFound": "Aucun Commune trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Commune {{ id }} ?"
+      },
+      "detail": {
+        "title": "Commune"
+      },
+      "id": "ID",
+      "addresse": "Addresse",
+      "denomination": "Denomination",
+      "faxe": "Faxe",
+      "logo": "Logo",
+      "sigle": "Sigle",
+      "telephone": "Telephone",
+      "urlsiteweb": "Urlsiteweb",
+      "type": "Type",
+      "typeautorite": "Typeautorite",
+      "department": "Department"
+    }
+  },
+  "referentielApp": {
+    "referentielCommune": {
+      "created": "Un nouveau Commune a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Commune avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Commune avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "gatewayApp": {
+    "referentielTypeAutoriteContractante": {
+      "home": {
+        "title": "Les types d'authorités contractante",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Type Autorite Contractante",
+        "createOrEditLabel": "Créer ou éditer un Type Autorite Contractante",
+        "notFound": "Aucun Type Autorite Contractante trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Type Autorite Contractante {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Autorite Contractante"
+      },
+      "id": "ID",
+      "code": "Code",
+      "description": "Description",
+      "libelle": "Libelle",
+      "ordre": "Ordre",
+      "commune": "Commune"
+    }
+  },
+  "referentielApp": {
+    "referentielTypeAutoriteContractante": {
+      "created": "Un nouveau Type Autorite Contractante a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type Autorite Contractante avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type Autorite Contractante avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}
